@@ -8,7 +8,7 @@ export const connect = async () => {
 
 
     return new Promise(async (resolve: (arg0: void) => void) => {
-        mongoose.set('debug', true)
+        mongoose.set('debug', env)
         await mongoose
             .connect(url, {
                 useUnifiedTopology: true,
