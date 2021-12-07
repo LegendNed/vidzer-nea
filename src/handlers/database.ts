@@ -16,6 +16,8 @@ export const connect = async () => {
             pass: password,
         } as ConnectOptions)
 
+    console.log(`Connected to ${database.connection.name} database`)
+
     let connection = database.connections[0]
     connection.on('connecting', () => console.info('database connecting'))
     connection.on('connected', () => console.info('database connected'))

@@ -1,6 +1,5 @@
 import express, { Application } from 'express'
 import cookieParser from 'cookie-parser'
-
 export default class {
     app: Application;
 
@@ -16,7 +15,7 @@ export default class {
         this.app.use(cookieParser(process.env.SECRET))
 
         this.initRouter()
-        this.app.listen(8080)
+        this.app.listen(8080, console.log.bind(console, 'Server is running on port 8080'))
     }
 
     private initRouter(): void {
