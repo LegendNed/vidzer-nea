@@ -1,6 +1,25 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+
+import '@/assets/styles/main.css'
+import '@/assets/styles/theme.css'
+import 'primeicons/primeicons.css';
+
 import router from './util/router'
 import store from './util/store'
 
-createApp(App).use(store).use(router).mount('#app')
+import Button from 'primevue/button';
+
+import MainScreen from './App.vue'
+const App = createApp(MainScreen)
+
+// Initialise PLugins
+App
+    .use(store)
+    .use(router)
+
+// Initialise custom components
+App
+    .component('Button', Button)
+
+// Mount the app
+App.mount('#app')

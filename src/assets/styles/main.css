@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --background: #0D306D;
+    --area: #092047;
+    --primary: #5155D6;
+    --secondary: #6165FF;
+}
+
+html, body {
+    margin: 0;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 10px;
+    color: white;
+}
+
+a:-webkit-any-link {
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+.container {
+    display: grid;
+
+    background-color: var(--background);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 100vh;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 40px 2.6fr 30px;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "navbar navbar exit"
+        "content content content"
+        "footer footer footer";
+}
+
+
+
+.navbar {
+    grid-area: navbar;
+}
+
+.navbar, .exit {
+    background-color: var(--area);
+    /* Have the entire top of the screen to be moved around */
+    -webkit-app-region: drag;
+}
+
+/* No drag class */
+.nd {
+    /* Enable default events on elements as drag overrides them*/
+    -webkit-app-region: no-drag;
+}
+
+.exit {
+    grid-area: exit;
+    /* Align the Buttons correctly */
+    text-align: right;
+    padding-right: 25px;
+    padding-top: 5px
+}
+
+.exit :first-child {
+    margin-right: 20px;
+}
+
+.footer {
+    grid-area: footer;
+    background-color: var(--area);
+    /* Put elements on both ends using space-between */
+    display: flex;
+    justify-content: space-between;
+    /* Align elements */
+    padding: 8px 20px 0 20px
+}
+
+.footer h3 {
+    /* Remove any form of margin */
+    margin: 0;
+}
+
+.content {
+    grid-area: content;
+}
