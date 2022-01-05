@@ -6,6 +6,7 @@ import 'primeicons/primeicons.css';
 
 import router from './util/router'
 import store from './util/store'
+import plugins from './util/plugins/'
 
 import Button from 'primevue/button';
 
@@ -16,6 +17,7 @@ const App = createApp(MainScreen)
 App
     .use(store)
     .use(router)
+    .use(plugins)
 
 // Initialise custom components
 App

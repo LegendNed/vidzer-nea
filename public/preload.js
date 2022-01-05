@@ -14,3 +14,9 @@ contextBridge.exposeInMainWorld('ipc', {
         }
     }
 });
+
+contextBridge.exposeInMainWorld('domain',
+    process.env.NODE_ENV !== 'production'
+        ? 'http://localhost:8000'
+        : 'someDomain.com'
+);
