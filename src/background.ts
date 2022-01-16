@@ -3,10 +3,7 @@
 import { app, protocol, BrowserWindow, ipcMain as ipc, BrowserWindowConstructorOptions, Tray, Menu } from 'electron'
 import { join as pathJoin } from 'path'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
-import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
-
-import * as IPC from '@electron/remote/main'
-IPC.initialize()
+import Registry from 'winreg'
 
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -25,6 +22,8 @@ class Application {
   }
 
   async createWindow() {
+    this.handleIPC()
+
     this.win = new BrowserWindow(this.options)
     let win = this.win
 
@@ -39,9 +38,6 @@ class Application {
       win.hide();
       event.returnValue = false;
     });
-
-    ipc.removeAllListeners()
-    this.handleIPC()
   }
 
   generateTray() {
@@ -105,6 +101,20 @@ class Application {
           break
         case 'close':
           this.win.close()
+          break
+        case 'hwid':
+          // Obtain registirys from HKEY_LOCAL_MACHINE which contains the HWID
+          const regKey = new Registry({
+            hive: Registry.HKLM,
+            key: '\\SOFTWARE\\Microsoft\\Cryptography',
+          })
+
+          //Obtain HWID and resolve it
+          regKey.get('MachineGuid', (error: any, item: any) => {
+            if (error) return event.returnValue = null
+
+            return event.returnValue = item.value
+          })
           break
       }
     })

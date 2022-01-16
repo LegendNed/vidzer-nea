@@ -11,13 +11,32 @@ html, body {
     margin: 0;
 
     font-family: 'Roboto', sans-serif;
-    font-size: 10px;
+    font-size: 14px;
     color: white;
 }
 
 a:-webkit-any-link {
     color: var(--secondary);
     text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--secondary);
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary);
 }
 
 .container {
@@ -37,8 +56,6 @@ a:-webkit-any-link {
         "content content content"
         "footer footer footer";
 }
-
-
 
 .navbar {
     grid-area: navbar;
@@ -61,7 +78,6 @@ a:-webkit-any-link {
     /* Align the Buttons correctly */
     text-align: right;
     padding-right: 25px;
-    padding-top: 5px
 }
 
 .exit :first-child {
@@ -78,11 +94,59 @@ a:-webkit-any-link {
     padding: 8px 20px 0 20px
 }
 
-.footer h3 {
+.footer h4 {
     /* Remove any form of margin */
     margin: 0;
 }
 
 .content {
     grid-area: content;
+}
+
+/* Align element to center of screen */
+.center-screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* Create the box for elements */
+.form {
+    padding: 20px;
+    background-color: var(--area);
+    width: 300px;
+    height: 150px;
+    border-radius: 24px;
+}
+
+.form h2 {
+    margin: 0 0 5px 0;
+}
+
+.form .input {
+    display: flex;
+}
+
+/* Match text to input field */
+.form .input h3 {
+    margin: 0 0 10px 0;
+    margin-right: 5px;
+    background-color: #0d306d;
+    border-radius: 4px;
+    width: 90px;
+    height: 35px;
+    text-align: center;
+    padding: 6px 0 0 0;
+}
+
+/* Change button font size */
+.form :last-child * {
+    font-size: 16px;
+}
+
+/* Change button hover color */
+.form :last-child *:enabled:hover {
+    color: var(--secondary);
 }

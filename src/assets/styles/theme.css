@@ -728,7 +728,6 @@
 
 .p-dropdown {
     background: #0D306D;
-    border: 1px solid #6165FF;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 3px;
 }
@@ -1092,7 +1091,7 @@
     color: rgba(255, 255, 255, 0.87);
     background: #0D306D;
     padding: 0.5rem 0.5rem;
-    border: 1px solid #6165FF;
+    border: none;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     appearance: none;
     border-radius: 3px;
@@ -1105,8 +1104,6 @@
 .p-inputtext:enabled:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 1px #cf95d9;
-    border-color: #5155D6;
 }
 
 .p-inputtext.p-invalid.p-component {
@@ -1843,12 +1840,12 @@
 }
 
 .p-button.p-button-sm {
-    font-size: 0.875rem;
-    padding: 0.4375rem 0.875rem;
+    font-size: 0.575rem;
+    padding: 0.2375rem 0.675rem;
 }
 
 .p-button.p-button-sm .p-button-icon {
-    font-size: 0.875rem;
+    font-size: 0.575rem;
 }
 
 .p-button.p-button-lg {
@@ -1857,7 +1854,7 @@
 }
 
 .p-button.p-button-lg .p-button-icon {
-    font-size: 2rem;
+    font-size: 1.25rem;
 }
 
 .p-fluid .p-button {
@@ -3019,6 +3016,10 @@
 
 .p-paginator .p-dropdown .p-dropdown-label {
     padding-right: 0;
+}
+
+.p-hidden-accessible {
+    display: none;
 }
 
 .p-paginator .p-paginator-current {
@@ -5263,6 +5264,7 @@
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
+    border: none;
     background: transparent;
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }

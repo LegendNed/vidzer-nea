@@ -15,8 +15,6 @@ export default {
         const Window: WindowExtended = window as unknown as WindowExtended;
 
         const Requester = new RequestHandler(Window.domain);
-        app.provide('get', Requester.get);
-        app.provide('post', Requester.post);
-        app.provide('upload', Requester.upload);
+        app.provide('request', Requester);
     }
 }

@@ -1,4 +1,6 @@
 <template>
+  <Toast position="bottom-right" />
+
   <div class="container">
     <div class="navbar"></div>
     <div class="exit">
@@ -15,8 +17,8 @@
     </div>
     <div class="content"><router-view /></div>
     <div class="footer">
-      <h3>Copyright &copy; 2021-2022 Ned (Under CC0)</h3>
-      <a href="http://github.com/LegendeNed"><h3>Github Page</h3></a>
+      <h4>Copyright &copy; 2021-2022 Ned (Under CC0)</h4>
+      <a href="http://github.com/LegendeNed"><h4>Github Page</h4></a>
     </div>
   </div>
 </template>

@@ -1,18 +1,15 @@
 import axios from 'axios';
 
+axios.defaults.headers.common['Authorization'] = (window as any).keytar.get();
 export default class {
-    //Define global variable types
-    domain: string;
-
     /* URL being the base URL of the API, which will be concat'ed with target routes*/
-    constructor(domain: string) {
-        this.domain = domain
-    }
+    constructor(public domain: string) { }
 
     get(url: string) {
-        return axios.get(this.domain + url)
+        return axios
+            .get(this.domain + url)
             .then(this.resolveStatus)
-            .catch((error: any) => ({ _: 1, error }))
+            .catch(this.resolveError)
     }
 
     /* Any form of data sent to the server will be handled with this function
@@ -20,9 +17,10 @@ export default class {
      * into a string that can be sent to the server. Headers define what type of data
      * we are uploading, in this case, JSON/text data. */
     post(url: string, data: any) {
-        return axios.post(this.domain + url, data)
+        return axios
+            .post(this.domain + url, data)
             .then(this.resolveStatus)
-            .catch((error: any) => ({ _: 1, error }))
+            .catch(this.resolveError)
     }
 
     /* File data/buffer will be returned HTML input; therefore, it has to be appended
@@ -37,15 +35,22 @@ export default class {
             headers: { "Content-Type": "multipart/form-data" },
         })
             .then(this.resolveStatus)
-            .catch((error: any) => ({ _: 1, error }))
+            .catch(this.resolveError)
     }
 
     //Validates for status errors, returning error to application, else returning response
     private resolveStatus(res: any) {
-        if (res.status >= 200 && res.status < 300) return res.json()
+        if (res.status >= 200 && res.status < 300) return res.data
 
         const error: any = new Error(res.statusText)
         error.response = res
         throw { _: 1, error }
+    }
+
+    private resolveError(error: any) {
+        const res = error.response
+        if (!res.data) return { _: 1, error }
+
+        return res.data
     }
 }
