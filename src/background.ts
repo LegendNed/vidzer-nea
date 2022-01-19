@@ -1,9 +1,11 @@
 'use strict'
 
 import { app, protocol, BrowserWindow, ipcMain as ipc, BrowserWindowConstructorOptions, Tray, Menu } from 'electron'
-import { join as pathJoin } from 'path'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
-import Registry from 'winreg'
+import { join as pathJoin } from 'path'
+
+import IPCHandler from './app/ipc'
+import Watcher from './app/watcher'
 
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -18,14 +20,14 @@ class Application {
     this.options = options
 
     this.isDevelopment = process.env.NODE_ENV !== 'production'
+    new Watcher()
     this.init()
   }
 
   async createWindow() {
-    this.handleIPC()
-
     this.win = new BrowserWindow(this.options)
-    let win = this.win
+    const win = this.win
+    new IPCHandler(win)
 
     if (process.env.WEBPACK_DEV_SERVER_URL) await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string)
     else {
@@ -91,33 +93,6 @@ class Application {
         })
       }
     }
-  }
-
-  handleIPC() {
-    ipc.on('application', (event, data) => {
-      switch (data.action) {
-        case 'minimize':
-          this.win.minimize()
-          break
-        case 'close':
-          this.win.close()
-          break
-        case 'hwid':
-          // Obtain registirys from HKEY_LOCAL_MACHINE which contains the HWID
-          const regKey = new Registry({
-            hive: Registry.HKLM,
-            key: '\\SOFTWARE\\Microsoft\\Cryptography',
-          })
-
-          //Obtain HWID and resolve it
-          regKey.get('MachineGuid', (error: any, item: any) => {
-            if (error) return event.returnValue = null
-
-            return event.returnValue = item.value
-          })
-          break
-      }
-    })
   }
 }
 

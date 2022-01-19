@@ -2,7 +2,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 const keytar = require('keytar');
 const { userInfo } = require('os');
 
-const validChannels = ['application'];
+const validChannels = ['application', 'path'];
 contextBridge.exposeInMainWorld('ipc', {
     send: (channel, data) => {
         if (validChannels.includes(channel)) {

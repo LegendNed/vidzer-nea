@@ -1,0 +1,13 @@
+{
+    "verbose": true,
+    "ignore": [
+        "node_modules/",
+        "dist_electron/",
+        ".vscode",
+        ".git"
+    ],
+    "watch": [
+        "src/app/"
+    ],
+    "ext": "ts"
+}
