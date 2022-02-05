@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
 import auth from './routes/auth'
-
+import upload from './routes/upload'
 export default class {
     app: Application;
 
@@ -28,5 +28,6 @@ export default class {
 
     private initRouter(): void {
         this.app.use('/auth', auth)
+        this.app.use('/upload', upload)
     }
 }

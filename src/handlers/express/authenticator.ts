@@ -3,7 +3,7 @@ import { verify } from 'jsonwebtoken'
 
 export default function (req: Request, res: Response, next: NextFunction) {
     try {
-        const token: any = req.headers['Authorization'];
+        const token: any = req.headers['authorization'];
         if (!token) return res.status(401).send('Unauthorized');
 
         const payload = verify(token, process.env.SECRET)
