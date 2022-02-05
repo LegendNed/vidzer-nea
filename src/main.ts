@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 
-import '@/assets/styles/main.css'
-import '@/assets/styles/theme.css'
+import '@/static/styles/main.css'
+import '@/static/styles/theme.css'
 import 'primeicons/primeicons.css';
 
 import store from './util/store'

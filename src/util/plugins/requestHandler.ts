@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.headers.common['Authorization'] = (window as any).keytar.get();
+axios.defaults.headers.common['authorization'] = (window as any).keytar.get();
 export default class {
     /* URL being the base URL of the API, which will be concat'ed with target routes*/
     constructor(public domain: string) { }
@@ -19,21 +19,6 @@ export default class {
     post(url: string, data: any) {
         return axios
             .post(this.domain + url, data)
-            .then(this.resolveStatus)
-            .catch(this.resolveError)
-    }
-
-    /* File data/buffer will be returned HTML input; therefore, it has to be appended
-     * to the form data, and then sent to the server. The authentication token is mandatory 
-     * as it will ensure that no one other than authenticated users can upload files. */
-    upload(file: any, metadata: any) {
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("metadata", metadata);
-
-        return axios.post(this.domain + "/api/upload", formData, {
-            headers: { "Content-Type": "multipart/form-data" },
-        })
             .then(this.resolveStatus)
             .catch(this.resolveError)
     }

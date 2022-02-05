@@ -3,15 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
-    "nodemon": "nodemon --config nodemon.json --exec \"yarn electron:serve\"",
-    "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "serve": "nodemon --config nodemon.json --exec \"yarn electron:serve\""
   },
+  "main": "background.js",
   "dependencies": {
     "@electron/remote": "^2.0.1",
     "axios": "^0.24.0",
@@ -21,6 +17,7 @@
     "electron-reload": "^2.0.0-alpha.1",
     "electron-store": "^8.0.1",
     "keytar": "^7.7.0",
+    "node-wav-player": "^0.2.0",
     "nodemon": "^2.0.15",
     "primeicons": "^5.0.0",
     "primevue": "^3.10.0",
