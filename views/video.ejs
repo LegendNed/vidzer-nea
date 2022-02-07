@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>
+        <% title %>
+    </title>
+    <meta property="og:site_name" content="Vidzer" />
+    <meta property="og:title" content="<%= title %>" />
+    <meta name="twitter:title" content="<%= title %>">
+    <meta name="description" content="Watch &#34;<%= title %>&#34; on Vidzer.">
+
+    <meta property="og:type" content="video.other">
+    <meta property="og:image" content="<%= thumbnail %>" />
+    <meta property="og:image:secure_url" content="<%= thumbnail %>" />
+    <meta property="og:image:type" content="image/jpg" />
+    <meta property="og:image:width" content="320">
+    <meta property="og:image:height" content="180">
+    <meta property="og:updated_time" content="<%= upload_date %>" />
+    <meta property="og:url" content="<%= url %>" />
+    <meta property="og:video" content="<%= video_url %>">
+    <meta property="og:video:url" content="<%= video_url %>">
+    <meta property="og:video:secure_url" content="<%= video_url %>">
+    <meta property="og:video:type" content="video/mp4">
+    <meta property="og:video:width" content="1920">
+    <meta property="og:video:height" content="1080">
+    <meta name="twitter:card" content="player">
+    <meta name="twitter:site" content="@vidzer">
+    <meta name="twitter:image" content="<%= thumbnail %>">
+    <meta name="twitter:player:width" content="1290">
+    <meta name="twitter:player:height" content="1080">
+    <meta name="twitter:player" content="<%= video_url %>">
+</head>
+
+<body>
+    <!-- Creates video element that can be controlled and embed into other sites -->
+    <video controls crossorigin playsinline data-poster="<%= thumbnail %>">
+        <source src="<%= video_url %>" type="video/mp4" />
+        <a href="<%= video_url %>" download>Download</a>
+    </video>
+
+    <style>
+        /* Ensure the body is able to contain one element, video and background is black */
+        body {
+            display: block;
+            margin: 8px;
+            background-color: rgb(0, 0, 0);
+        }
+
+        /* Ensures the video fits to screen, regardless the size,
+           without any overflow */
+        video {
+            object-fit: contain;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            max-height: 100%;
+            max-width: 100%;
+            margin: auto;
+        }
+    </style>
+</body>
+
+</html>

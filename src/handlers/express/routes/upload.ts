@@ -60,10 +60,11 @@ app.post('/', upload.single('file'), async (req, res) => {
     }
 
     const id = await generateUUID()
+    const output = join(__dirname, '../../../../storage/', `${id}.mp4`)
 
     // Using parameters from decomposition inside a shell
     // escaper ensure injection attacks can occur with 'UUID' /s
-    const command = shell([
+    let command = shell([
         //ffmpeg -i input.mp4 -filter:v scale=1280:-1 -b:v 7087k -b:a 130k -ar 44100 -r 60 output.mp4
         ffmpegPath,
         '-i', file.path,
@@ -73,7 +74,7 @@ app.post('/', upload.single('file'), async (req, res) => {
         '-b:a', '130k',
         '-ar', '44100',
         '-r', '60',
-        join(__dirname, '../../../../storage/', `${id}.mp4`)
+        output
     ])
 
     // Promisify the promise in order to allow asynchronous code
@@ -83,8 +84,21 @@ app.post('/', upload.single('file'), async (req, res) => {
     // Remove the temporary file from the OS temp directory
     await new Promise(resolve => unlink(file.path, resolve))
 
+    //Generate video thumbnail
+    command = shell([
+        ffmpegPath,
+        '-ss', '00:00:01.00',
+        '-i', output, // Using compressed video as thumbnail
+        '-vf', "scale=320:320:force_original_aspect_ratio=decrease",
+        '-vframes', '1',
+        join(__dirname, '../../../../storage/', `${id}.jpg`)
+    ])
+
+    // Promisify the promise in order to allow asynchronous code
+    await new Promise(resolve => exec(command, resolve))
+
     // Get stats of the new file created by ffmpeg
-    let stats = await statSync(join(__dirname, '../../../../storage/', `${id}.mp4`))
+    let stats = await statSync(output)
 
     const model = {
         name: id,

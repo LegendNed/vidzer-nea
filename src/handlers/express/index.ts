@@ -4,12 +4,13 @@ import cors from 'cors'
 
 import auth from './routes/auth'
 import upload from './routes/upload'
+import video from './routes/video'
+import thumbnail from './routes/thumbnail'
 export default class {
     app: Application;
 
     constructor() {
         this.app = express()
-
         this.init()
     }
 
@@ -22,6 +23,8 @@ export default class {
             methods: ['GET', 'POST']
         }))
 
+        this.app.use(express.static('views'))
+        this.app.set('view engine', 'ejs');
         this.initRouter()
         this.app.listen(8000, console.log.bind(console, 'Server is running on port 8080'))
     }
@@ -29,5 +32,7 @@ export default class {
     private initRouter(): void {
         this.app.use('/auth', auth)
         this.app.use('/upload', upload)
+        this.app.use('/v', video)
+        this.app.use('/t', thumbnail)
     }
 }
