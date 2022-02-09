@@ -34,7 +34,7 @@ export default class {
 
     private resolveError(error: any) {
         const res = error.response
-        if (!res.data) return { _: 1, error }
+        if (!res?.data) return { _: 1, error }
 
         return res.data
     }

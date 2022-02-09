@@ -3,6 +3,7 @@ import FormData from 'form-data'
 import Path from 'path'
 import keytar from 'keytar'
 import { userInfo } from 'os'
+import { execSync } from 'child_process'
 
 import Formats from '../config/videoFormats'
 import Notification from '../notification'
@@ -22,8 +23,10 @@ const upload = async (file: any, metadata: any) => {
     formData.append("file", file);
     formData.append("metadata", metadata);
 
-    return axios.post(DOMAIN + "/api/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+    return axios.post(DOMAIN + "/upload", formData, {
+        headers: formData.getHeaders(),
+        maxBodyLength: Infinity,
+        maxContentLength: Infinity,
     })
         .then((res: any) => {
             if (res.status >= 200 && res.status < 300) return res.data
@@ -66,4 +69,26 @@ export default async function (path: string, stats: Stats) {
         type: 'error'
     })
 
+    if (typeof data === 'string' && data.includes('PayloadTooLargeError: request entity too large'))
+        return Notification({
+            title: 'Vidzer - File too large',
+            body: `${NAME} is too large! Ensure that clips are less than 150MB`
+        }) // Removing type doesn't sent a notification sound
+
+    if (!data.success) return Notification({
+        title: 'Vidzer - Upload failed',
+        body: data.message,
+        type: 'error'
+    })
+
+    const URI = process.env.NODE_ENV === 'production'
+        ? 'some production uri'
+        : 'http://localhost:8000/v/'
+    execSync(`echo ${URI}${data.data.uriID} | clip`)
+
+    return Notification({
+        title: 'Vidzer - Upload successful',
+        body: `${NAME} has been uploaded to Vidzer!`,
+        type: 'success'
+    })
 }
