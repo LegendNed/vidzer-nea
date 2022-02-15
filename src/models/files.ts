@@ -2,6 +2,7 @@ import { model as createModel, Schema, Document, ObjectId } from 'mongoose'
 
 interface File extends Document {
     metadata: { [key: string]: any },
+    hwid: string,
     name: string,
     uriID: string,
     parent: ObjectId[],
@@ -11,6 +12,7 @@ interface File extends Document {
 
 const FileSchema: Schema = new Schema({
     metadata: Object,
+    hwid: String,
     name: String,
     uriID: String,
     parent: Array,

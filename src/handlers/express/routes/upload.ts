@@ -59,6 +59,7 @@ app.post('/', upload.single('file'), async (req, res) => {
         return res.status(200).send({ success: false, message: 'Video metadata is not valid' })
     }
 
+    const { hwid } = req['user']
     const id = await generateUUID()
     const output = join(__dirname, '../../../../storage/', `${id}.mp4`)
 
@@ -101,6 +102,7 @@ app.post('/', upload.single('file'), async (req, res) => {
     let stats = await statSync(output)
 
     const model = {
+        hwid,
         name: id,
         uriID: await generateURIID(),
         type: 'file',
