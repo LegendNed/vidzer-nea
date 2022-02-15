@@ -3247,18 +3247,18 @@
 }
 
 .p-treetable .p-treetable-header {
-    background: #092047;
+    background: #0d306d;
     color: rgba(255, 255, 255, 0.6);
-    border: 1px solid #6165FF;
+    border: 1px solid #0d306d;
     border-width: 0 0 1px 0;
     padding: 1rem 1rem;
     font-weight: 600;
 }
 
 .p-treetable .p-treetable-footer {
-    background: #092047;
+    background: #0d306d;
     color: rgba(255, 255, 255, 0.87);
-    border: 1px solid #6165FF;
+    border: 1px solid #0d306d;
     border-width: 0 0 1px 0;
     padding: 1rem 1rem;
     font-weight: 600;
@@ -3267,26 +3267,26 @@
 .p-treetable .p-treetable-thead>tr>th {
     text-align: left;
     padding: 1rem 1rem;
-    border: 1px solid #6165FF;
+    border: 1px solid #0d306d;
     border-width: 0 0 1px 0;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.87);
-    background: #092047;
+    background: #0d306d;
     transition: box-shadow 0.2s;
 }
 
 .p-treetable .p-treetable-tfoot>tr>td {
     text-align: left;
     padding: 1rem 1rem;
-    border: 1px solid #6165FF;
+    border: 1px solid #0d306d;
     border-width: 0 0 1px 0;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.87);
-    background: #092047;
+    background: #0d306d;
 }
 
 .p-treetable .p-sortable-column {
-    outline-color: #cf95d9;
+    outline-color: #0d306d;
 }
 
 .p-treetable .p-sortable-column .p-sortable-column-icon {
@@ -3314,25 +3314,26 @@
 }
 
 .p-treetable .p-sortable-column.p-highlight {
-    background: #092047;
-    color: #5155D6;
+    background: #0d306d;
+    color: #0d306d;
 }
 
 .p-treetable .p-sortable-column.p-highlight .p-sortable-column-icon {
-    color: #5155D6;
+    color: #0d306d;
 }
 
 .p-treetable .p-treetable-tbody>tr {
-    background: #092047;
+    background: #0d306d;
     color: rgba(255, 255, 255, 0.87);
     transition: box-shadow 0.2s;
-    outline-color: #cf95d9;
+    outline-color: #0d306d;
 }
 
 .p-treetable .p-treetable-tbody>tr>td {
     text-align: left;
-    border: 1px solid #6165FF;
-    border-width: 0 0 1px 0;
+    border: 1px solid #092047;
+    border-width: 3px;
+    border-radius: 15px;
     padding: 1rem 1rem;
 }
 
@@ -3434,11 +3435,12 @@
 }
 
 .p-treetable.p-treetable-sm .p-treetable-thead>tr>th {
-    padding: 0.5rem 0.5rem;
+    padding: 0;
 }
 
 .p-treetable.p-treetable-sm .p-treetable-tbody>tr>td {
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 1rem;
+    margin: 0 10px 10px 10px;
 }
 
 .p-treetable.p-treetable-sm .p-treetable-tfoot>tr>td {
@@ -3827,6 +3829,7 @@
 .p-confirm-popup .p-confirm-popup-footer button {
     margin: 0 0.5rem 0 0;
     width: auto;
+    font-size: 1rem;
 }
 
 .p-confirm-popup .p-confirm-popup-footer button:last-child {

@@ -69,6 +69,7 @@ const login = async () => {
     });
 
   await window.keytar.set(data);
+  await request.init();
   return router.push({ name: "Home" });
 };
 

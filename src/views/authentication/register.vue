@@ -7,7 +7,7 @@
         <InputText
           style="width: 100%; height: 35px"
           readonly
-          :placeholder="$route.query.token"
+          :placeholder="$route.query.hwid"
         />
       </div>
       <InputText
@@ -37,14 +37,11 @@ import secQuestions from "../../util/secQuestion.json";
 import { inject, ref } from "vue";
 const request: any = inject("request");
 
-import { useRoute, useRouter } from "vue-router";
-const route = useRoute();
+import { useRouter } from "vue-router";
 const router = useRouter();
 
 import { useToast } from "primevue/usetoast";
 const toast = useToast();
-
-const token = route.query.token;
 
 const questionID = ref("");
 const questionAnswer = ref("");
@@ -101,6 +98,7 @@ const submit = async () => {
     });
 
   await window.keytar.set(data);
+  await request.init();
   return router.push({ name: "Home" });
 };
 </script>

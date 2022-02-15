@@ -16,6 +16,7 @@
     "electron-cookies": "heap/electron-cookies",
     "electron-reload": "^2.0.0-alpha.1",
     "electron-store": "^8.0.1",
+    "file-saver": "^2.0.5",
     "keytar": "^7.7.0",
     "node-wav-player": "^0.2.0",
     "nodemon": "^2.0.15",

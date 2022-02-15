@@ -9,9 +9,12 @@ import router from './util/router'
 import plugins from './util/plugins/'
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice';
 
+import ConfirmPopup from 'primevue/confirmpopup';
 import DataTable from 'primevue/datatable';
 import InputText from 'primevue/inputtext';
+import TreeTable from 'primevue/treetable';
 import Dropdown from 'primevue/dropdown';
 import Column from 'primevue/column';
 import Dialog from 'primevue/dialog';
@@ -28,11 +31,14 @@ App
     .use(plugins)
     .use(PrimeVue)
     .use(ToastService)
+    .use(ConfirmationService)
 
 // Initialise custom components from PrimeFaces
 App
+    .component('ConfirmPopup', ConfirmPopup)
     .component('DataTable', DataTable)
     .component('InputText', InputText)
+    .component('TreeTable', TreeTable)
     .component('Dropdown', Dropdown)
     .component('Button', Button)
     .component('Dialog', Dialog)

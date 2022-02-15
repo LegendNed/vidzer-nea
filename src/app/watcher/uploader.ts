@@ -63,24 +63,21 @@ export default async function (path: string, stats: Stats) {
     const file = await createReadStream(path)
     const data = await upload(file, JSON.stringify(stats))
 
+    /* Handle Error checks, from request and backend */
     if (data._) return Notification({
         title: 'Vidzer - Upload failed',
         body: `${NAME} failed to upload, either an error occurred or server offline.`,
         type: 'error'
     })
 
-    if (typeof data === 'string' && data.includes('PayloadTooLargeError: request entity too large'))
-        return Notification({
-            title: 'Vidzer - File too large',
-            body: `${NAME} is too large! Ensure that clips are less than 150MB`
-        }) // Removing type doesn't sent a notification sound
-
     if (!data.success) return Notification({
         title: 'Vidzer - Upload failed',
         body: data.message,
         type: 'error'
     })
+    /* End of error handling */
 
+    // Create URL based on development enviroment and URI ID 
     const URI = process.env.NODE_ENV === 'production'
         ? 'some production uri'
         : 'http://localhost:8000/v/'

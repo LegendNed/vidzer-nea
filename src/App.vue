@@ -1,5 +1,6 @@
 <template>
   <Toast position="bottom-right" />
+  <ConfirmPopup />
 
   <div class="container">
     <div class="navbar"></div>

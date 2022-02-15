@@ -1,9 +1,13 @@
 import axios from 'axios';
-
-axios.defaults.headers.common['authorization'] = (window as any).keytar.get();
 export default class {
     /* URL being the base URL of the API, which will be concat'ed with target routes*/
-    constructor(public domain: string) { }
+    constructor(public domain: string) {
+        this.init()
+    }
+
+    async init() {
+        axios.defaults.headers.common['authorization'] = await (window as any).keytar.get();
+    }
 
     get(url: string) {
         return axios
